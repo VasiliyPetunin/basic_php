@@ -1,0 +1,1 @@
+<img src="images/<?= $_GET['img']?>" alt="<?= $_GET['img']?>">
