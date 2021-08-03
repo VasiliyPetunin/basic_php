@@ -2,8 +2,6 @@
 include ("config.php");
 
 $req = mysqli_query($connect, "SELECT * FROM `reviews`;");
-$reviews = mysqli_fetch_assoc($req);
-$i = 0;
 
 ?>
 
@@ -20,14 +18,15 @@ $i = 0;
 </head>
 <body>
     <h3>Отзывы:</h3>
-    <?php while($i < count($reviews)){ ?>
+    <?php while($reviews = mysqli_fetch_assoc($req)):?>
         <div style="border: 1px solid black;">
-            <p>Название продукта: <?= $reviews[$i]["product_name"] ?>.</p><br>
-            <p>Имя пользователя: <?= $reviews[$i]["user_name"] ?>.</p><br>
-            <p>Комментарий: <?= $reviews[$i]["text"] ?>.</p><br>
-            <p>Дата публикации: <?= $reviews[$i]["uploaded_at"] ?>.</p><br>
+            <p>Название продукта: <?= $reviews["product_name"] ?>.</p><br>
+            <p>Имя пользователя: <?= $reviews["user_name"] ?>.</p><br>
+            <p>Комментарий: <?= $reviews["text"] ?>.</p><br>
+            <p>Дата публикации: <?= $reviews["uploaded_at"] ?>.</p><br>
         </div>
-    <?php $i++ ?>
-    <?php } ?>
+    <?php $i++;
+        endwhile;
+    ?>
 </body>
 </html>
